@@ -53,7 +53,7 @@ export class UsuarioDialogComponent implements OnInit {
         });
   }
 
-  validCampo(campo: string, valor: string) {
+  validCampo(campo: string, valor: any) {
    if (this.data.editing) {
     console.log(this.usuarioTmp);
     if (this.usuarioTmp[campo] == this.usuario[campo]) return null

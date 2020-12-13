@@ -4,7 +4,7 @@
     <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="2%">
       <mat-form-field fxFlex>
         <input matInput placeholder="Cedula" name="cedula" formControlName="cedula" [(ngModel)]="usuario.cedula"
-        (blur)="(formGroup.get('cedula').hasError('pattern') || formGroup.get('cedula').hasError('required'))? null : validCampo('cedula', usuario.cedula)">
+          (blur)="(formGroup.get('cedula').hasError('pattern') || formGroup.get('cedula').hasError('required'))? null : validCampo('cedula', this.usuario.cedula)">
         <mat-error *ngIf="formGroup.get('cedula').hasError('required')">
           Cedula es requerida
         </mat-error>
@@ -27,8 +27,9 @@
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <mat-label>Email</mat-label>
-        <input type="email" matInput formControlName="correo" [(ngModel)]="usuario.correo" placeholder="Ej. email@ejemplo.com" 
-          (blur)="(formGroup.get('correo').hasError('email') || formGroup.get('correo').hasError('required'))? null : validCampo('correo', usuario.correo)">
+        <input type="email" matInput formControlName="correo" [(ngModel)]="usuario.correo"
+          placeholder="Ej. email@ejemplo.com"
+          (blur)="(formGroup.get('correo').hasError('email') || formGroup.get('correo').hasError('required'))? null : validCampo('correo', this.usuario.correo)">
         <mat-error *ngIf="formGroup.get('correo').hasError('email') && !formGroup.get('correo').hasError('required')">
           Por favor, ingrese una dirección de correo electrónico válida
         </mat-error>
