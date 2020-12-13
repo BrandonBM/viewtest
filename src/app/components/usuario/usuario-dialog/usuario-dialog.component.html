@@ -1,0 +1,56 @@
+<h2 mat-dialog-title>{{ data.editing ? 'Edición de Usuario' : 'Creación de Usuario' }} </h2>
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" #usuarioForm="ngForm" autocomplete="off" novalidate>
+  <mat-dialog-content>
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="2%">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Cedula" name="cedula" formControlName="cedula" [(ngModel)]="usuario.cedula"
+        (blur)="(formGroup.get('cedula').hasError('pattern') || formGroup.get('cedula').hasError('required'))? null : validCampo('cedula', usuario.cedula)">
+        <mat-error *ngIf="formGroup.get('cedula').hasError('required')">
+          Cedula es requerida
+        </mat-error>
+        <mat-error *ngIf="formGroup.get('cedula').hasError('pattern')">
+          Por favor, ingrese solo números
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Nombre" name="nombres" formControlName="nombres" [(ngModel)]="usuario.nombres">
+        <mat-error *ngIf="formGroup.get('nombres').hasError('required')">
+          Nombre es requerido
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Apellido" name="apellidos" formControlName="apellidos"
+          [(ngModel)]="usuario.apellidos">
+        <mat-error *ngIf="formGroup.get('apellidos').hasError('required')">
+          Apellido es requerido
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="correo" [(ngModel)]="usuario.correo" placeholder="Ej. email@ejemplo.com" 
+          (blur)="(formGroup.get('correo').hasError('email') || formGroup.get('correo').hasError('required'))? null : validCampo('correo', usuario.correo)">
+        <mat-error *ngIf="formGroup.get('correo').hasError('email') && !formGroup.get('correo').hasError('required')">
+          Por favor, ingrese una dirección de correo electrónico válida
+        </mat-error>
+        <mat-error *ngIf="formGroup.get('correo').hasError('required')">
+          Correo es requerido
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Telefono</mat-label>
+        <span matPrefix>+57 &nbsp;</span>
+        <input type="tel" matInput formControlName="telefono" [(ngModel)]="usuario.telefono" placeholder="555-555-1234">
+        <mat-error *ngIf="formGroup.get('telefono').hasError('pattern')">
+          Por favor, ingrese solo números
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button (click)="cerrar(undefined)" type="button">Cancelar</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-raised-button type="submit" color="primary" [disabled]="formGroup.invalid">
+      {{ data.editing ? 'Actualizar':'Crear' }}
+    </button>
+  </mat-dialog-actions>
+</form>
